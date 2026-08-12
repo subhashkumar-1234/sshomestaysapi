@@ -1,0 +1,36 @@
+{
+  "name": "sshomestays-api",
+  "version": "1.0.0",
+  "description": "Backend REST API for SSHomestays Real Estate & Homestays Application",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "keywords": [
+    "express",
+    "nodejs",
+    "rest-api",
+    "sshomestays",
+    "dynamodb",
+    "aws-s3",
+    "jwt"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.1107.0",
+    "@aws-sdk/client-s3": "^3.1107.0",
+    "@aws-sdk/lib-dynamodb": "^3.1107.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.6",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.2.0",
+    "multer-s3": "^3.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
