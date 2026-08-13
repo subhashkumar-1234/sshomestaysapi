@@ -7,7 +7,6 @@ const facilityRoutes = require("./routes/facility.routes");
 const discoverVillaRoutes = require("./routes/discoverVilla.routes");
 const uploadRoutes = require("./routes/upload.routes");
 const errorMiddleware = require("./middleware/error.middleware");
-const setupSwagger = require("./config/swagger");
 
 const app = express();
 
@@ -35,9 +34,6 @@ app.use(
     extended: true,
   })
 );
-
-// Initialize Swagger Documentation UI
-setupSwagger(app);
 
 // API Route Bindings
 app.use("/api/users", userRoutes);
