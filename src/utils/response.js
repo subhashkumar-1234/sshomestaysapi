@@ -1,14 +1,11 @@
 /**
- * Send standard success response
- * @param {Object} res Express response object
- * @param {Number} statusCode HTTP status code (default: 200)
- * @param {String} message Success message
- * @param {Object|Array} data Data payload
+ * Standard API response helper utilities
  */
-const sendSuccess = (res, statusCode = 200, message = 'Success', data = null) => {
+
+const sendSuccess = (res, statusCode = 200, message = "Success", data = null) => {
   const responsePayload = {
     success: true,
-    message
+    message,
   };
 
   if (data !== null) {
@@ -18,17 +15,10 @@ const sendSuccess = (res, statusCode = 200, message = 'Success', data = null) =>
   return res.status(statusCode).json(responsePayload);
 };
 
-/**
- * Send standard error response
- * @param {Object} res Express response object
- * @param {Number} statusCode HTTP status code (default: 500)
- * @param {String} message Error message
- * @param {Array|Object} errors Detailed errors
- */
-const sendError = (res, statusCode = 500, message = 'Internal Server Error', errors = null) => {
+const sendError = (res, statusCode = 500, message = "Internal Server Error", errors = null) => {
   const responsePayload = {
     success: false,
-    message
+    message,
   };
 
   if (errors !== null) {
@@ -40,5 +30,5 @@ const sendError = (res, statusCode = 500, message = 'Internal Server Error', err
 
 module.exports = {
   sendSuccess,
-  sendError
+  sendError,
 };
