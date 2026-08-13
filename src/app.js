@@ -11,9 +11,6 @@ const setupSwagger = require("./config/swagger");
 
 const app = express();
 
-// Initialize Swagger Documentation UI
-setupSwagger(app);
-
 // Dynamic CORS Middleware
 const allowedOrigins = (process.env.CORS_ORIGIN || "*")
   .split(",")
@@ -38,6 +35,9 @@ app.use(
     extended: true,
   })
 );
+
+// Initialize Swagger Documentation UI
+setupSwagger(app);
 
 // API Route Bindings
 app.use("/api/users", userRoutes);
