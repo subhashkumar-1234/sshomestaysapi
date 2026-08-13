@@ -9,20 +9,12 @@ const errorMiddleware = require("./middleware/error.middleware");
 
 const app = express();
 
-// Pre-computed CORS Origins (Optimized for zero allocation per request)
-const allowedOrigins = (process.env.CORS_ORIGIN || "*")
-  .split(",")
-  .map((origin) => origin.trim());
-
+// Dynamic CORS Configuration (Allows Vercel, Localhost, and any frontend domain)
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes("*") || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("CORS Policy Violation: Origin not allowed"));
-    }
-  },
+  origin: true,
   credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
 };
 
 app.use(cors(corsOptions));
