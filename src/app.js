@@ -7,12 +7,8 @@ const facilityRoutes = require("./routes/facility.routes");
 const discoverVillaRoutes = require("./routes/discoverVilla.routes");
 const uploadRoutes = require("./routes/upload.routes");
 const errorMiddleware = require("./middleware/error.middleware");
-const setupSwagger = require("./config/swagger");
 
 const app = express();
-
-// Initialize Swagger Documentation for Facilities and Discover Villas
-setupSwagger(app);
 
 // Dynamic CORS Middleware
 const allowedOrigins = (process.env.CORS_ORIGIN || "*")
