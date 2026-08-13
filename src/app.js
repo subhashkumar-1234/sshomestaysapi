@@ -10,23 +10,23 @@ const errorMiddleware = require("./middleware/error.middleware");
 
 const app = express();
 
-// Dynamic CORS Middleware
+// Pre-computed CORS Origins (Optimized for zero allocation per request)
 const allowedOrigins = (process.env.CORS_ORIGIN || "*")
   .split(",")
   .map((origin) => origin.trim());
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes("*") || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("CORS Policy Violation: Origin not allowed"));
-      }
-    },
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes("*") || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS Policy Violation: Origin not allowed"));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json({ limit: "10mb" }));
 app.use(
   express.urlencoded({
@@ -47,6 +47,14 @@ app.get("/", (req, res) => {
     success: true,
     message: "SS Homestays REST API is operational",
     timestamp: new Date().toISOString(),
+  });
+});
+
+// 404 Handler for Unmatched Endpoints
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `Endpoint not found: ${req.method} ${req.originalUrl}`,
   });
 });
 
