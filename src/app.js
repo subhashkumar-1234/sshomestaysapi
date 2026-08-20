@@ -6,6 +6,7 @@ const facilityRoutes = require("./routes/facility.routes");
 const discoverVillaRoutes = require("./routes/discoverVilla.routes");
 const uploadRoutes = require("./routes/upload.routes");
 const errorMiddleware = require("./middleware/error.middleware");
+const { setupSwagger } = require("./config/swagger");
 
 const app = express();
 
@@ -26,6 +27,9 @@ app.use(
   })
 );
 
+// Setup Swagger API Documentation UI
+setupSwagger(app);
+
 // API Route Bindings
 app.use("/api/users", userRoutes);
 app.use("/api/facilities", facilityRoutes);
@@ -37,6 +41,7 @@ app.get("/", (req, res) => {
   res.json({
     success: true,
     message: "SS Homestays REST API is operational",
+    documentation: "/api-docs",
     timestamp: new Date().toISOString(),
   });
 });
