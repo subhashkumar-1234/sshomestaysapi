@@ -20,14 +20,6 @@ const options = {
       },
     ],
     components: {
-      securitySchemes: {
-        bearerAuth: {
-          type: "http",
-          scheme: "bearer",
-          bearerFormat: "JWT",
-          description: "Enter JWT Bearer token to access protected endpoints",
-        },
-      },
       schemas: {
         ApiResponse: {
           type: "object",
@@ -227,7 +219,11 @@ const options = {
       },
     },
   },
-  apis: ["./src/routes/*.js"],
+  apis: [
+    "./src/routes/facility.routes.js",
+    "./src/routes/discoverVilla.routes.js",
+    "./src/routes/upload.routes.js",
+  ],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
